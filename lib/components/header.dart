@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
 import '../models/responsive.dart';
+import '../screens/cart_screen.dart';
 import 'menu.dart';
 
 class Header extends StatelessWidget {
@@ -80,10 +81,20 @@ class Header extends StatelessWidget {
             color: kSecondaryColor,
             borderRadius: BorderRadius.circular(8.0),
           ),
-          child: Icon(
-            Icons.shopping_cart_outlined,
-            color: Colors.white,
-            size: 22,
+          child: InkWell(
+            onTap: () {
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) =>  const CartScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.shopping_cart_outlined,
+              color: Colors.white,
+              size: 22,
+            ),
           ),
         )
       ],
