@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
-
-
+import '../screens/about_us.dart';
+import '../screens/contact_us.dart';
+import '../screens/faq_screen.dart';
 
 class HeaderWebMenu extends StatelessWidget {
   const HeaderWebMenu({
@@ -22,28 +23,49 @@ class HeaderWebMenu extends StatelessWidget {
         ),
         HeaderMenu(
           press: () {},
-          title: "For Riders",
+          title: "Restrurent",
         ),
         SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
-          press: () {},
-          title: "About",
+          press: () {
+            // Navigator.push<void>(
+            //   context,
+            //   MaterialPageRoute<void>(
+            //     builder: (BuildContext context) => const AboutUsPage(),
+            //   ),
+            // );
+          },
+          title: "About us",
         ),
         SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
-          press: () {},
-          title: "Reviews",
+          press: () {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const ContactUsPage(),
+              ),
+            );
+          },
+          title: "Contact us",
         ),
         SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
-          press: () {},
-          title: "Restaurants",
+          press: () {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const FAQPage(),
+              ),
+            );
+          },
+          title: "FAQ",
         ),
       ],
     );

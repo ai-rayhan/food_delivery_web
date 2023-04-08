@@ -18,8 +18,8 @@ class Footer extends StatelessWidget {
       width: double.infinity,
       color: kPrimaryColor,
       child: Container(
-        padding: EdgeInsets.all(kPadding),
-        constraints: BoxConstraints(maxWidth: kMaxWidth),
+        padding: const EdgeInsets.all(kPadding),
+        constraints: const BoxConstraints(maxWidth: kMaxWidth),
         child: Column(
           children: [
             Row(
@@ -35,12 +35,12 @@ class Footer extends StatelessWidget {
                             fontWeight: FontWeight.w900,
                             color: kSecondaryColor),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const[
                           SocialIcon(
                             icon: "assets/icons/google-icon.svg",
                           ),
@@ -62,13 +62,13 @@ class Footer extends StatelessWidget {
                   ),
                 ),
                 if (Responsive.isDesktop(context))
-                  Expanded(flex: 3, child: HeaderWebMenu()),
+                  const Expanded(flex: 3, child: HeaderWebMenu()),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            if (!Responsive.isDesktop(context)) MobFooterMenu(),
+            if (!Responsive.isDesktop(context)) const MobFooterMenu(),
           ],
         ),
       ),
@@ -87,7 +87,7 @@ class SocialIcon extends StatelessWidget {
     return Container(
       height: 35,
       width: 35,
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
