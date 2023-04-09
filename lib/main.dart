@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/firebase_options.dart';
@@ -5,6 +6,7 @@ import 'package:food_delivery_web/screens/CRUD.dart';
 import 'package:food_delivery_web/screens/about_us.dart';
 import 'package:food_delivery_web/screens/auth_screen.dart';
 import 'package:food_delivery_web/screens/home_screen.dart';
+import 'package:provider/provider.dart';
 
 
 void main()async {
@@ -27,11 +29,25 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Montserrat',
       ),
-      home: const AboutUsPage(),
+      home: const AuthWrapper(),
       routes: {
           HomeScreen.routename: (ctx) => HomeScreen(),
         },
     );
   }
-}
 
+
+  
+}
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User?>();
+    if (firebaseUser != null && firebaseUser.emailVerified) {
+      return const HomeScreen();
+    } else {
+      return const AuthScreen();
+    }
+  }}

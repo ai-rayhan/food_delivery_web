@@ -43,4 +43,28 @@ List<Product> products = [
     title: "Specky burger",
     image: "assets/images/specky-burger.jpg",
   ),
+   Product(
+    id: 2,
+    title: "Chicken pizza with pepper",
+    image: "assets/images/chicken-pizza-with-bell-red-yellow-pepper.jpg",
+  ),
+   Product(
+    id: 2,
+    title: "Chicken pizza with pepper",
+    image: "assets/images/chicken-pizza-with-bell-red-yellow-pepper.jpg",
+  ),
+   Product(
+    id: 2,
+    title: "Chicken pizza with pepper",
+    image: "assets/images/chicken-pizza-with-bell-red-yellow-pepper.jpg",
+  ),
+   Product(
+    id: 2,
+    title: "Chicken pizza with pepper",
+    image: "assets/images/chicken-pizza-with-bell-red-yellow-pepper.jpg",
+  ), Product(
+    id: 2,
+    title: "Chicken pizza with pepper",
+    image: "assets/images/chicken-pizza-with-bell-red-yellow-pepper.jpg",
+  ),
 ];

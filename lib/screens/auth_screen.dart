@@ -1,12 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_web/provider/firebase_auth_methods.dart';
 import 'package:food_delivery_web/screens/home_screen.dart';
+import 'package:phoenix_native/phoenix_native.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:flutter/foundation.dart';
 
 import '../constants/constant.dart';
-import '../provider/auth.dart';
 
 enum AuthMode { signup, login }
 
@@ -17,7 +19,14 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final firebaseAuth = FirebaseAuth.instance;
+    final currentUser = firebaseAuth.currentUser;
     final deviceSize = MediaQuery.of(context).size;
+        if (currentUser != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => HomeScreen()),
+      );
+    }
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -67,13 +76,17 @@ class AuthCard extends StatefulWidget {
 }
 
 class _AuthCardState extends State<AuthCard>
-    with SingleTickerProviderStateMixin {
+     {
   final GlobalKey<FormState> _formKey = GlobalKey();
   AuthMode _authMode = AuthMode.login;
-  final Map<String, String> _authData = {
-    'email': '',
-    'password': '',
-  };
+
+    String? 
+      _fullname,
+      _email,
+      _password,
+      _confirmpassword
+      ;
+
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
@@ -87,14 +100,22 @@ class _AuthCardState extends State<AuthCard>
       _isLoading = true;
     });
     if (_authMode == AuthMode.login) {
-      // await Provider.of<Auth>(context, listen: false)
-      //     .signin(_authData['email']!, _authData['password']!);
-
-      Navigator.pushReplacementNamed(context, HomeScreen.routename);
+      await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+      email: _email!,
+      password: _password!,
+      context: context,
+    );
     } else {
-      // Navigator.pushReplacementNamed(context, ProductsOverviewScreen.routeName);
-      // await Provider.of<Auth>(context, listen: false)
-      //     .signup(_authData['email']!, _authData['password']!);
+
+      await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+      email: _email!,
+      password: _password!,
+      fullname: _fullname!,
+      context: context,
+    );
+  setState(() {
+    _authMode=AuthMode.login;
+  });
     }
     setState(() {
       _isLoading = false;
@@ -143,7 +164,7 @@ class _AuthCardState extends State<AuthCard>
                   return null;
                 },
                 onSaved: (value) {
-                  _authData['email'] = value!;
+                  _email = value!;
                 },
               ),
               const Divider(),
@@ -158,7 +179,7 @@ class _AuthCardState extends State<AuthCard>
                   return null;
                 },
                 onSaved: (value) {
-                  _authData['password'] = value!;
+                  _password = value!;
                 },
               ),
               if (_authMode == AuthMode.signup) const Divider(),
@@ -176,6 +197,22 @@ class _AuthCardState extends State<AuthCard>
                         }
                       : null,
                 ),
+                              if (_authMode == AuthMode.signup) const Divider(),
+
+                              if (_authMode == AuthMode.signup)
+
+                    TextFormField(
+                decoration: decoration(' Your name', Icons.person),
+                validator: (value) {
+                  if (value!.isEmpty ) {
+                    return 'Enter your name';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _fullname = value!;
+                },
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -245,32 +282,7 @@ class _AuthCardState extends State<AuthCard>
               ),
               const Divider(),
               const Center(child: Text('OR')),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                      width: 40,
-                      child: RawMaterialButton(
-                        onPressed: () {},
-                        shape: const CircleBorder(),
-                        child: Image.asset('assets/images/google.png'),
-                      )),
-                  SizedBox(
-                      width: 40,
-                      child: RawMaterialButton(
-                        onPressed: () {},
-                        shape: const CircleBorder(),
-                        child: Image.asset('assets/images/fb.png'),
-                      )),
-                  SizedBox(
-                      width: 40,
-                      child: RawMaterialButton(
-                        onPressed: () {},
-                        shape: const CircleBorder(),
-                        child: Image.asset('assets/images/twitter.png'),
-                      ))
-                ],
-              )
+              
             ],
           ),
         ),
