@@ -20,7 +20,7 @@ class FAQPage extends StatelessWidget {
               child: Column(
                 
                 children: [
-                   Text("About Us",style: TextStyle(fontSize: 30),),
+                   Text("Frequently Asked Questions",style: TextStyle(fontSize: 30),),
                   FAQItem(
                     question: 'How do I place an order?',
                     answer:
