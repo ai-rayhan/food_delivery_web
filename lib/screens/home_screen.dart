@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:food_delivery_web/components/appbar.dart';
+import 'package:food_delivery_web/components/display_product.dart';
 import 'package:food_delivery_web/components/slider.dart';
 
 
@@ -88,8 +88,15 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               //header
               SliderWidget(),
+              if(MediaQuery.of(context).size.width>500)
+              ServicesCard(),
               //body
-              BodyContainer(),
+ SizedBox(
+                height: 30,
+              ),
+              ProductListScreen(),
+
+             
               //footer
               SizedBox(
                 height: 30,

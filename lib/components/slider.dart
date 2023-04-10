@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_delivery_web/screens/about_us.dart';
 
 class SliderWidget extends StatefulWidget {
   @override
@@ -50,21 +51,72 @@ class _SliderWidgetState extends State<SliderWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500,
-      child: PageView.builder(
-        itemCount: _urls.length,
-        itemBuilder: (context, index) {
-          return Image.network(
+  height: 500,
+  child: Stack(
+    children: [
+  
+
+PageView.builder(
+  itemCount: _urls.length,
+  itemBuilder: (context, index) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Image.network(
             _urls[_currentIndex],
             fit: BoxFit.cover,
-          );
-        },
-        onPageChanged: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
+          ),
+        ),
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Once you try it",
+                style: TextStyle(
+                  fontSize: 60,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+                Text(
+                "You will love it",
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutUsPage()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(decoration: BoxDecoration(color: Colors.deepOrange, borderRadius: BorderRadius.circular(50)),child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text("About us",style: TextStyle(color: Colors.white),),
+                  ),),
+                ),
+              )
+            ],
+          ),
+        ),
+ 
+      ],
     );
+  },
+  onPageChanged: (index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  },
+),
+
+    ],
+  ),
+);
+
   }
 }
