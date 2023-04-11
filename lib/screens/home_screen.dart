@@ -1,28 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery_web/components/appbar.dart';
 import 'package:food_delivery_web/components/display_product.dart';
 import 'package:food_delivery_web/components/slider.dart';
 
-
 import '../constants/constants.dart';
-import '../components/banner_section.dart';
-import '../components/body.dart';
-import '../components/email_banner.dart';
+
 import '../components/footer.dart';
-import '../components/header.dart';
-import '../components/header_container.dart';
+
 import '../components/menu.dart';
-import '../components/product.dart';
 import '../components/services_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  static const routename='home';
+  static const routename = 'home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -32,12 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-      PreferredSize(child: MyAppBar(),preferredSize: Size.fromHeight(kToolbarHeight),)
-      
-      
-      
-    ,
+      appBar: PreferredSize(
+        child: MyAppBar(),
+        preferredSize: Size.fromHeight(kToolbarHeight),
+      ),
       drawer: Drawer(
         child: ListView(
           // ignore: prefer_const_literals_to_create_immutables
@@ -64,15 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               //header
               SliderWidget(),
-              if(MediaQuery.of(context).size.width>500)
-              ServicesCard(),
+              if (MediaQuery.of(context).size.width > 500) ServicesCard(),
               //body
- SizedBox(
+              SizedBox(
                 height: 30,
               ),
               ProductListScreen(),
 
-             
               //footer
               SizedBox(
                 height: 30,

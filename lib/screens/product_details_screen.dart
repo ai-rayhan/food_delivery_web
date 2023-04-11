@@ -1,38 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_web/components/footer.dart';
-import 'package:food_delivery_web/components/product.dart';
+import 'package:food_delivery_web/components/appbar.dart';
+import 'package:food_delivery_web/models/product_model.dart';
 
-import '../components/email_banner.dart';
-import '../components/header.dart';
-import '../components/header_container.dart';
-import '../constants/constants.dart';
+class ProductDetailsScreen extends StatefulWidget {
+  const ProductDetailsScreen(
+      {super.key,
+      required this.name,
+      required this.category,
+      required this.description,
+      required this.id,
+      required this.image,
+      required this.price});
+  final String name;
+  final String image;
+  final double price;
+  final String id;
+  final String description;
+  final String category;
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
 
-class ProductDetailsScreen extends StatelessWidget {
-  ProductDetailsScreen({this.product,this.onpress});
-  final product;
-  final onpress;
-
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-           padding: const EdgeInsets.all(kPadding),
-          //  constraints: BoxConstraints(maxWidth: kMaxWidth),
-          child: Column(
-            children: [
-              const Header(),
-              Products(product: product, press: onpress),
-             
-             const SizedBox(
-              height: 40,
-            ),
-            Footer()
-            ],
-            
-          ),
-        ),
+      appBar: PreferredSize(
+        child: MyAppBar(),
+        preferredSize: Size.fromHeight(kToolbarHeight),
       ),
+      body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18),
+                    child: Container(
+                      height: 550,
+                      width: 370,
+                      child: Image.network(
+                        widget.image,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18, top: 25),
+                    child: Container(
+                      width: 450,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.name,
+                            style: TextStyle(
+                                fontSize: 40, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "\$${widget.price.toString()}",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            widget.description,
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ]),
+          )),
     );
   }
 }

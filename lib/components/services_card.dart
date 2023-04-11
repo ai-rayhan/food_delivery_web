@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_web/components/body.dart';
 import 'package:food_delivery_web/models/responsive.dart';
 
 import '../constants/constants.dart';
@@ -38,27 +37,7 @@ class ServicesCard extends StatelessWidget {
         Services(
           image: "assets/images/menu.jpg",
           title: "So Much to Choose From",
-          ontap: () {
-            Navigator.push<void>(
-              context,
-              MaterialPageRoute<void>(
-                builder: (BuildContext context) => ServiceCardDetailScreen(
-                  service: Responsive(desktop: ProductCard(
-              crossAxiscount: _size.width < 650 ? 2 : 3,
-              aspectRatio: _size.width < 650 ? 0.85 : 1.1,
-            ),
-            tablet: ProductCard(
-              crossAxiscount: _size.width < 825 ? 2 : 3,
-              aspectRatio: _size.width < 825 ? 0.85 : 1.1,
-            ),
-            mobile: ProductCard(
-              crossAxiscount: _size.width < 690 ? 2 : 3,
-              aspectRatio: _size.width < 560 ? 0.85 : 1.1,
-            ),)
-                ),
-              ),
-            );
-          },
+          ontap: () {},
         ),
         Services(
           image: "assets/images/offer.jpg",
