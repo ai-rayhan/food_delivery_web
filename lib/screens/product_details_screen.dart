@@ -6,7 +6,6 @@ class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen(
       {super.key,
       required this.name,
-      required this.category,
       required this.description,
       required this.id,
       required this.image,
@@ -16,12 +15,12 @@ class ProductDetailsScreen extends StatefulWidget {
   final double price;
   final String id;
   final String description;
-  final String category;
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  int quantity = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,8 +72,59 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           Text(
                             widget.description,
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 22,
                             ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            width: 300,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.deepOrange,
+                            ),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          quantity -= 1;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.remove,
+                                        color: Colors.white,
+                                      )),
+                                  InkWell(
+                                    onTap: () {
+                                      print("send data to server");
+                                    },
+                                    child: Text(
+                                      "ADD ${quantity.toString()} ITEM TO CART",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          quantity += 1;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      )),
+                                ]),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Total Cost: ${widget.price * quantity}',
+                            style: TextStyle(fontSize: 18),
                           )
                         ],
                       ),

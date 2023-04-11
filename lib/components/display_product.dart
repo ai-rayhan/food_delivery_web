@@ -8,13 +8,11 @@ class Product {
   final double price;
   final String id;
   final String description;
-  final String category;
 
   Product(
       {required this.name,
       required this.image,
       required this.price,
-      required this.category,
       required this.description,
       required this.id});
 }
@@ -30,7 +28,6 @@ class ProductService {
     final List<dynamic> productDetails = snapshot['productdetails'];
     productDetails.forEach((details) {
       final product = Product(
-        category: details['category'],
         description: details['description'],
         id: details['id'],
         name: details['name'],
@@ -91,7 +88,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ProductDetailsScreen(
-                                    category: product.category,
                                     description: product.description,
                                     id: product.id,
                                     image: product.image,
