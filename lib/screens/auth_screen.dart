@@ -19,14 +19,9 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final firebaseAuth = FirebaseAuth.instance;
-    final currentUser = firebaseAuth.currentUser;
+ 
     final deviceSize = MediaQuery.of(context).size;
-        if (currentUser != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => HomeScreen()),
-      );
-    }
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

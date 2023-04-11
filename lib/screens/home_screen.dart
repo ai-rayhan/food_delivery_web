@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:food_delivery_web/components/appbar.dart';
 import 'package:food_delivery_web/components/display_product.dart';
 import 'package:food_delivery_web/components/slider.dart';
 
@@ -32,36 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
+      PreferredSize(child: MyAppBar(),preferredSize: Size.fromHeight(kToolbarHeight),)
       
       
       
-      
-      AppBar(
-        elevation: 0.1,
-        backgroundColor: Colors.deepOrange, 
-        
-            title: Text(
-              "Foodie",
-              style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
-            ),
-            actions: [
-        
-            TextButton(onPressed: (){}, child: Text("Home",style: TextStyle(color: Colors.white),)),
-                          TextButton(onPressed: (){}, child: Text("Review",style: TextStyle(color: Colors.white),)),
-              TextButton(onPressed: (){}, child: Text("FAQ",style: TextStyle(color: Colors.white),)),
-
-
-                 IconButton(
-                  onPressed: () {
-                  },
-                  icon: Icon(Icons.search)),
-              IconButton(
-                  onPressed: () {
-                  },
-                  icon: Icon(Icons.shopping_cart)),
-               
-            ],
-          ),
+    ,
       drawer: Drawer(
         child: ListView(
           // ignore: prefer_const_literals_to_create_immutables
