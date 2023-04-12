@@ -52,7 +52,7 @@ class _ManageProductState extends State<ManageProduct> {
                 child: Card(
                   child: ListTile(
                     leading: Image.network(prod['image'], width: 50),
-                    subtitle: Text(prod['price']),
+                    subtitle: Text(prod['price'].toString()),
                     title: Text(prod['name']),
                     trailing: Container(
                       width: 100,
