@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
-import '../screens/about_us.dart';
 import '../screens/contact_us.dart';
 import '../screens/faq_screen.dart';
 
@@ -18,14 +17,14 @@ class HeaderWebMenu extends StatelessWidget {
           press: () {},
           title: "Menu",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
           press: () {},
           title: "Restrurent",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
@@ -39,7 +38,7 @@ class HeaderWebMenu extends StatelessWidget {
           },
           title: "About us",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
@@ -53,7 +52,7 @@ class HeaderWebMenu extends StatelessWidget {
           },
           title: "Contact us",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
@@ -85,28 +84,28 @@ class MobFooterMenu extends StatelessWidget {
           press: () {},
           title: "Menu",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
           press: () {},
           title: "For Riders",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
           press: () {},
           title: "About",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
           press: () {},
           title: "Reviews",
         ),
-        SizedBox(
+        const SizedBox(
           width: kPadding,
         ),
         HeaderMenu(
@@ -130,11 +129,9 @@ class HeaderMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: press,
-      child: Container(
-        child: Text(
-          title,
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-        ),
+      child: Text(
+        title,
+        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
       ),
     );
   }
@@ -159,28 +156,28 @@ class _MobMenuState extends State<MobMenu> {
             press: () {},
             title: "Menu",
           ),
-          SizedBox(
+          const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
             title: "For Riders",
           ),
-          SizedBox(
+          const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
             title: "About",
           ),
-          SizedBox(
+          const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
             title: "Reviews",
           ),
-          SizedBox(
+          const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(

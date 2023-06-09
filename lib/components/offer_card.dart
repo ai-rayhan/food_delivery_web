@@ -11,8 +11,9 @@ class OfferCard extends StatelessWidget {
     var devicesize = MediaQuery.of(context).size.width;
     if (devicesize <= 700) {
       return 100;
-    } else
+    } else {
       return 200;
+    }
   }
 
   @override

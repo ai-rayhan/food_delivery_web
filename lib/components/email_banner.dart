@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
 
-
-
 class EmailBanner extends StatelessWidget {
   const EmailBanner({
     Key? key,
@@ -28,7 +26,7 @@ class EmailBanner extends StatelessWidget {
             alignment: Alignment.center,
             child: Column(
               children: [
-                AutoSizeText(
+                const AutoSizeText(
                   "Join our member and get\ndiscount up to 50%",
                   maxLines: 2,
                   minFontSize: 14,
@@ -37,24 +35,24 @@ class EmailBanner extends StatelessWidget {
                       fontSize: 26,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   children: [
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         height: 50,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
                                 Border.all(color: Colors.grey.withOpacity(0.3)),
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(15.0),
                                 bottomLeft: Radius.circular(15.0))),
                         child: TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Enter your email here",
                               hintStyle: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 14),
@@ -68,12 +66,12 @@ class EmailBanner extends StatelessWidget {
                     Container(
                       height: 50,
                       width: 50,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: kSecondaryColor,
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(15.0),
                               bottomRight: Radius.circular(15.0))),
-                      child: Icon(
+                      child: const Icon(
                         Icons.shopping_bag_outlined,
                         color: Colors.white,
                         size: 22,

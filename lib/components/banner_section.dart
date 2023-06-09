@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
 
-
-
 class BannerSection extends StatelessWidget {
   const BannerSection({
     Key? key,
@@ -14,11 +12,11 @@ class BannerSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
+        const Expanded(
           flex: 3,
           child: AboutSection(),
         ),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Expanded(
@@ -38,10 +36,10 @@ class MobBanner extends StatefulWidget {
   const MobBanner({Key? key}) : super(key: key);
 
   @override
-  _MobBannerState createState() => _MobBannerState();
+  MobBannerState createState() => MobBannerState();
 }
 
-class _MobBannerState extends State<MobBanner> {
+class MobBannerState extends State<MobBanner> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,10 +53,10 @@ class _MobBannerState extends State<MobBanner> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
-        AboutSection(),
+        const AboutSection(),
       ],
     );
   }
@@ -76,43 +74,43 @@ class AboutSection extends StatelessWidget {
       children: [
         // ignore: prefer_const_constructors
         //it will adjust its size according to screeen
-        AutoSizeText(
+        const AutoSizeText(
           "Eat today",
           maxLines: 1,
           style: TextStyle(fontSize: 56, fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        AutoSizeText(
+        const AutoSizeText(
           "Live another day",
           maxLines: 1,
           style: TextStyle(
             fontSize: 56,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Text(
+        const Text(
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.black54,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Container(
-          padding: EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           height: 50,
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: Colors.grey.withOpacity(0.3)),
           ),
           child: TextFormField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 suffixIcon: Icon(
                   Icons.adjust_rounded,
                   color: kSecondaryColor,
@@ -124,7 +122,7 @@ class AboutSection extends StatelessWidget {
                     UnderlineInputBorder(borderSide: BorderSide.none)),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Row(
@@ -134,7 +132,7 @@ class AboutSection extends StatelessWidget {
                 height: 55,
                 color: kSecondaryColor,
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   "Delivery",
                   style: TextStyle(
                       color: Colors.white,
@@ -143,8 +141,8 @@ class AboutSection extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "or",
                 style: TextStyle(
@@ -154,19 +152,19 @@ class AboutSection extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 child: OutlinedButton(
                   onPressed: () {},
-                  child: Text(
+                  style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: kSecondaryColor)),
+                  child: const Text(
                     "Pick Up",
                     style: TextStyle(
                         color: kSecondaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   ),
-                  style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: kSecondaryColor)),
                 ),
               ),
             )

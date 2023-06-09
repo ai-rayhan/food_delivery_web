@@ -30,6 +30,7 @@ class ProductService {
     final List<Product> products = [];
 
     final List<dynamic> productDetails = snapshot['productdetails'];
+    // ignore: avoid_function_literals_in_foreach_calls
     productDetails.forEach((details) {
       final product = Product(
         description: details['description'],
@@ -46,83 +47,91 @@ class ProductService {
 }
 
 class ProductListScreen extends StatefulWidget {
+  const ProductListScreen({super.key});
+
   @override
-  _ProductListScreenState createState() => _ProductListScreenState();
+  ProductListScreenState createState() => ProductListScreenState();
 }
 
-class _ProductListScreenState extends State<ProductListScreen> {
+class ProductListScreenState extends State<ProductListScreen> {
   final ProductService _productService = ProductService();
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-    return Container(
-      child: FutureBuilder(
-          future: _productService.getAllProducts(),
-          builder: (context, AsyncSnapshot<List<Product>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            }
+    final Size size = MediaQuery.of(context).size;
+    return FutureBuilder(
+        future: _productService.getAllProducts(),
+        builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            }
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
 
-            final products = snapshot.data ?? [];
+          final products = snapshot.data ?? [];
 
-            if (products.isEmpty) {
-              return Center(child: Text('No products found.'));
-            }
+          if (products.isEmpty) {
+            return const Center(child: Text('No products found.'));
+          }
 
-            return Padding(
-              padding: const EdgeInsets.only(left: 40,right: 40),
-              child: Column(
-                children: [
-                 Text("Popular Now",style: TextStyle(fontSize: 25),),
-                 Divider(),
-                  Responsive(
-                    desktop: ProductCard(
-                      products: products,
-                      crossAxiscount: _size.width < 650 ? 2 : 3,
-                      aspectRatio: _size.width < 650 ? 0.85 : 1.1,
-                    ),
-                    tablet: ProductCard(
-                      products: products,
-                      crossAxiscount: _size.width < 825 ? 2 : 3,
-                      aspectRatio: _size.width < 825 ? 0.85 : 1.1,
-                    ),
-                    mobile: ProductCard(
-                      products: products,
-                      crossAxiscount: _size.width < 690 ? 2 : 3,
-                      aspectRatio: _size.width < 560 ? 0.85 : 1.1,
-                    ),
+          return Padding(
+            padding: const EdgeInsets.only(left: 40, right: 40),
+            child: Column(
+              children: [
+                const Text(
+                  "Popular Now",
+                  style: TextStyle(fontSize: 25),
+                ),
+                const Divider(),
+                Responsive(
+                  desktop: ProductCard(
+                    products: products,
+                    crossAxiscount: size.width < 650 ? 2 : 3,
+                    aspectRatio: size.width < 650 ? 0.85 : 1.1,
                   ),
-                    OfferCard(),
-                    SizedBox(height: 20,),
-                    Text("Browse Top Deals",style: TextStyle(fontSize: 25),),
-                  Divider(),
-                   Responsive(
-                    desktop: ProductCard(
-                      products: products,
-                      crossAxiscount: _size.width < 650 ? 2 : 3,
-                      aspectRatio: _size.width < 650 ? 0.85 : 1.1,
-                    ),
-                    tablet: ProductCard(
-                      products: products,
-                      crossAxiscount: _size.width < 825 ? 2 : 3,
-                      aspectRatio: _size.width < 825 ? 0.85 : 1.1,
-                    ),
-                    mobile: ProductCard(
-                      products: products,
-                      crossAxiscount: _size.width < 690 ? 2 : 3,
-                      aspectRatio: _size.width < 560 ? 0.85 : 1.1,
-                    ),
+                  tablet: ProductCard(
+                    products: products,
+                    crossAxiscount: size.width < 825 ? 2 : 3,
+                    aspectRatio: size.width < 825 ? 0.85 : 1.1,
                   ),
-                ],
-              ),
-            );
-          }),
-    );
+                  mobile: ProductCard(
+                    products: products,
+                    crossAxiscount: size.width < 690 ? 2 : 3,
+                    aspectRatio: size.width < 560 ? 0.85 : 1.1,
+                  ),
+                ),
+                const OfferCard(),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Browse Top Deals",
+                  style: TextStyle(fontSize: 25),
+                ),
+                const Divider(),
+                Responsive(
+                  desktop: ProductCard(
+                    products: products,
+                    crossAxiscount: size.width < 650 ? 2 : 3,
+                    aspectRatio: size.width < 650 ? 0.85 : 1.1,
+                  ),
+                  tablet: ProductCard(
+                    products: products,
+                    crossAxiscount: size.width < 825 ? 2 : 3,
+                    aspectRatio: size.width < 825 ? 0.85 : 1.1,
+                  ),
+                  mobile: ProductCard(
+                    products: products,
+                    crossAxiscount: size.width < 690 ? 2 : 3,
+                    aspectRatio: size.width < 560 ? 0.85 : 1.1,
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }
 
@@ -135,7 +144,9 @@ class ProductCard extends StatelessWidget {
   });
 
   final List<Product> products;
+  // ignore: prefer_typing_uninitialized_variables
   final aspectRatio;
+  // ignore: prefer_typing_uninitialized_variables
   final crossAxiscount;
 
   @override
@@ -154,32 +165,32 @@ class ProductCard extends StatelessWidget {
           return ui.Products(
             product: product,
             press: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProductDetailsScreen(
-                              description: product.description,
-                              id: product.id,
-                              image: product.image,
-                              name: product.name,
-                              price: product.price,
-                            )));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProductDetailsScreen(
+                            description: product.description,
+                            id: product.id,
+                            image: product.image,
+                            name: product.name,
+                            price: product.price,
+                          )));
             },
           );
           // return Padding(
           //   padding: const EdgeInsets.all(8.0),
           //   child: InkWell(
-              // onTap: () {
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) => ProductDetailsScreen(
-              //                 description: product.description,
-              //                 id: product.id,
-              //                 image: product.image,
-              //                 name: product.name,
-              //                 price: product.price,
-              //               )));
+          // onTap: () {
+          //   Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => ProductDetailsScreen(
+          //                 description: product.description,
+          //                 id: product.id,
+          //                 image: product.image,
+          //                 name: product.name,
+          //                 price: product.price,
+          //               )));
           //     },
           //     child: Card(
           //       child: Column(

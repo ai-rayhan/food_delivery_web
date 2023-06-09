@@ -45,7 +45,7 @@ class _AddProductState extends State<AddProduct> {
         }
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Product added successfully'),
         ),
       );
@@ -54,7 +54,7 @@ class _AddProductState extends State<AddProduct> {
     } catch (error) {
       // show error message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to add product'),
         ),
       );
@@ -65,7 +65,7 @@ class _AddProductState extends State<AddProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Product'),
+        title: const Text('Add Product'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(160.0),
@@ -75,7 +75,7 @@ class _AddProductState extends State<AddProduct> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 controller: _nameController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -84,9 +84,9 @@ class _AddProductState extends State<AddProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Price'),
+                decoration: const InputDecoration(labelText: 'Price'),
                 controller: _priceController,
                 keyboardType: TextInputType.number,
                 validator: (value) {
@@ -99,9 +99,9 @@ class _AddProductState extends State<AddProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Image URL'),
+                decoration: const InputDecoration(labelText: 'Image URL'),
                 controller: _imageUrlController,
                 keyboardType: TextInputType.url,
                 validator: (value) {
@@ -111,9 +111,9 @@ class _AddProductState extends State<AddProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 controller: _descriptionController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -122,10 +122,10 @@ class _AddProductState extends State<AddProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
             ],
           ),

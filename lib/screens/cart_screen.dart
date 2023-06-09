@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_web/constants/constant.dart';
-
 
 import '../constants/constants.dart';
 import '../models/product_model.dart';
@@ -9,14 +7,13 @@ class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
 
   @override
-  _CartScreenState createState() => _CartScreenState();
+  CartScreenState createState() => CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
-
+class CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    var devicesize=MediaQuery.of(context).size;
+    var devicesize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -27,10 +24,10 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      
       body: SafeArea(
           child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: devicesize.width/7, vertical: 10),
+        padding: EdgeInsets.symmetric(
+            horizontal: devicesize.width / 7, vertical: 10),
         child: ListView(
           children: [
             ListView.builder(
@@ -59,7 +56,6 @@ class FavouriteCard extends StatelessWidget {
   final VoidCallback press;
   @override
   Widget build(BuildContext context) {
-    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: InkWell(
@@ -97,10 +93,10 @@ class FavouriteCard extends StatelessWidget {
                         color: kPrimaryColor,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Lorem ipsum salt as seer amer bty ruy erw as dosl poue oiu oi',
                       maxLines: 2,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 15,
                       ),
                     ),
@@ -110,9 +106,9 @@ class FavouriteCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "\$20",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/header.dart';
 import 'package:food_delivery_web/constants/constant.dart';
@@ -9,19 +11,25 @@ class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: SingleChildScrollView(
         child: Column(
           children: [
             const Header(),
             Container(
-              padding: EdgeInsets.symmetric(horizontal:devicesize(context).width/6, vertical: devicesize(context).height/6),
+              padding: EdgeInsets.symmetric(
+                  horizontal: devicesize(context).width / 6,
+                  vertical: devicesize(context).height / 6),
               // color: kSecondaryColor,
               child: Column(
-                children:const [
-                Text("Contact Us",style: TextStyle(fontSize: 30),),
-                  SizedBox(height: 10,),
-                   Padding(
+                children: const [
+                  Text(
+                    "Contact Us",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text(
                       'We would love to hear from you!',
@@ -31,7 +39,7 @@ class ContactUsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       'If you have any questions, comments, or concerns, please don\'t hesitate to contact us using the form below. You can also reach us by phone or email.',
@@ -41,12 +49,12 @@ class ContactUsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: ContactForm(),
                   ),
-                   SizedBox(height: 20),
-                   ContactInfo(),
+                  SizedBox(height: 20),
+                  ContactInfo(),
                 ],
               ),
             ),
@@ -61,10 +69,10 @@ class ContactForm extends StatefulWidget {
   const ContactForm({Key? key}) : super(key: key);
 
   @override
-  _ContactFormState createState() => _ContactFormState();
+  ContactFormState createState() => ContactFormState();
 }
 
-class _ContactFormState extends State<ContactForm> {
+class ContactFormState extends State<ContactForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _name = '';
@@ -173,7 +181,6 @@ class ContactInfo extends StatelessWidget {
           title: const Text('Phone'),
           subtitle: const Text('+1 (555) 123-4567'),
           onTap: () async {
-            final url = 'tel:+15551234567';
 // if (await canLaunch(url)) {
 // await launch(url);
 // } else {
@@ -186,7 +193,6 @@ class ContactInfo extends StatelessWidget {
           title: const Text('Email'),
           subtitle: const Text('info@yourwebsite.com'),
           onTap: () async {
-            final url = 'mailto:info@yourwebsite.com';
 // if (await canLaunch(url)) {
 // await launch(url);
 // } else {

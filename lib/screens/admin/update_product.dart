@@ -1,16 +1,18 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class UpdateProduct extends StatefulWidget {
   final String productId;
 
-  UpdateProduct({required this.productId});
+  const UpdateProduct({super.key, required this.productId});
 
   @override
-  _UpdateProductState createState() => _UpdateProductState();
+  UpdateProductState createState() => UpdateProductState();
 }
 
-class _UpdateProductState extends State<UpdateProduct> {
+class UpdateProductState extends State<UpdateProduct> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _priceController = TextEditingController();
@@ -45,13 +47,13 @@ class _UpdateProductState extends State<UpdateProduct> {
         }
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Product updated successfully'),
         ),
       );
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to update product'),
         ),
       );
@@ -83,7 +85,7 @@ class _UpdateProductState extends State<UpdateProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update Product'),
+        title: const Text('Update Product'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(160.0),
@@ -93,7 +95,7 @@ class _UpdateProductState extends State<UpdateProduct> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 controller: _nameController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -102,9 +104,9 @@ class _UpdateProductState extends State<UpdateProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Price'),
+                decoration: const InputDecoration(labelText: 'Price'),
                 controller: _priceController,
                 keyboardType: TextInputType.number,
                 validator: (value) {
@@ -117,9 +119,9 @@ class _UpdateProductState extends State<UpdateProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Image URL'),
+                decoration: const InputDecoration(labelText: 'Image URL'),
                 controller: _imageUrlController,
                 keyboardType: TextInputType.url,
                 validator: (value) {
@@ -129,9 +131,9 @@ class _UpdateProductState extends State<UpdateProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 controller: _descriptionController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -140,7 +142,7 @@ class _UpdateProductState extends State<UpdateProduct> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
                   _submitForm();
@@ -199,7 +201,7 @@ class _UpdateProductState extends State<UpdateProduct> {
                   //   );
                   // }
                 },
-                child: Text('Update'),
+                child: const Text('Update'),
               ),
             ],
           ),

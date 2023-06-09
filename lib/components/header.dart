@@ -12,7 +12,7 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Row(
       children: [
         // it  display only on mobile and tab
@@ -24,23 +24,23 @@ class Header extends StatelessWidget {
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                   },
-                  icon: Icon(Icons.menu))),
-        Text(
+                  icon: const Icon(Icons.menu))),
+        const Text(
           "Foodie",
           style: TextStyle(
               fontSize: 25.0,
               fontWeight: FontWeight.w900,
               color: kSecondaryColor),
         ),
-        Spacer(),
+        const Spacer(),
         //menu
-        if (Responsive.isDesktop(context)) HeaderWebMenu(),
-        Spacer(),
+        if (Responsive.isDesktop(context)) const HeaderWebMenu(),
+        const Spacer(),
 
-        _size.width > 400
+        size.width > 400
             ? Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
@@ -48,7 +48,7 @@ class Header extends StatelessWidget {
                     border: Border.all(color: Colors.grey.withOpacity(0.3)),
                   ),
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         prefixIcon: Icon(
                           Icons.search,
                           color: Colors.black,
@@ -64,14 +64,14 @@ class Header extends StatelessWidget {
                 ),
               )
             : Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 height: 50,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.grey.withOpacity(0.3)),
                 ),
-                child: Icon(Icons.search)),
-        SizedBox(
+                child: const Icon(Icons.search)),
+        const SizedBox(
           width: 10,
         ),
         Container(
@@ -86,11 +86,11 @@ class Header extends StatelessWidget {
               Navigator.push<void>(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) =>  const CartScreen(),
+                  builder: (BuildContext context) => const CartScreen(),
                 ),
               );
             },
-            child: Icon(
+            child: const Icon(
               Icons.shopping_cart_outlined,
               color: Colors.white,
               size: 22,

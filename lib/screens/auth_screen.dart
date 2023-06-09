@@ -1,10 +1,8 @@
+// ignore_for_file: unused_field
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/provider/firebase_auth_methods.dart';
-import 'package:food_delivery_web/screens/home_screen.dart';
-import 'package:phoenix_native/phoenix_native.dart';
-
-import 'package:provider/provider.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -19,7 +17,6 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     final deviceSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -67,20 +64,14 @@ class AuthCard extends StatefulWidget {
   const AuthCard({super.key});
 
   @override
-  _AuthCardState createState() => _AuthCardState();
+  AuthCardState createState() => AuthCardState();
 }
 
-class _AuthCardState extends State<AuthCard>
-     {
+class AuthCardState extends State<AuthCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   AuthMode _authMode = AuthMode.login;
 
-    String? 
-      _fullname,
-      _email,
-      _password,
-      _confirmpassword
-      ;
+  String? _fullname, _email, _password, _confirmpassword;
 
   var _isLoading = false;
   final _passwordController = TextEditingController();
@@ -96,21 +87,20 @@ class _AuthCardState extends State<AuthCard>
     });
     if (_authMode == AuthMode.login) {
       await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
-      email: _email!,
-      password: _password!,
-      context: context,
-    );
+        email: _email!,
+        password: _password!,
+        context: context,
+      );
     } else {
-
       await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
-      email: _email!,
-      password: _password!,
-      fullname: _fullname!,
-      context: context,
-    );
-  setState(() {
-    _authMode=AuthMode.login;
-  });
+        email: _email!,
+        password: _password!,
+        fullname: _fullname!,
+        context: context,
+      );
+      setState(() {
+        _authMode = AuthMode.login;
+      });
     }
     setState(() {
       _isLoading = false;
@@ -192,22 +182,20 @@ class _AuthCardState extends State<AuthCard>
                         }
                       : null,
                 ),
-                              if (_authMode == AuthMode.signup) const Divider(),
-
-                              if (_authMode == AuthMode.signup)
-
-                    TextFormField(
-                decoration: decoration(' Your name', Icons.person),
-                validator: (value) {
-                  if (value!.isEmpty ) {
-                    return 'Enter your name';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _fullname = value!;
-                },
-              ),
+              if (_authMode == AuthMode.signup) const Divider(),
+              if (_authMode == AuthMode.signup)
+                TextFormField(
+                  decoration: decoration(' Your name', Icons.person),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter your name';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _fullname = value!;
+                  },
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -277,7 +265,6 @@ class _AuthCardState extends State<AuthCard>
               ),
               const Divider(),
               const Center(child: Text('OR')),
-              
             ],
           ),
         ),

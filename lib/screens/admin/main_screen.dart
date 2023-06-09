@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/appbar.dart';
 import 'package:food_delivery_web/screens/admin/add_product.dart';
 import 'package:food_delivery_web/screens/admin/manage_product.dart';
-import 'package:food_delivery_web/screens/admin/update_product.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -15,9 +14,9 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          child: MyAppBar(), preferredSize: Size.fromHeight(kToolbarHeight)),
-      body: Container(
+      appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight), child: MyAppBar()),
+      body: SizedBox(
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -25,7 +24,7 @@ class _AdminScreenState extends State<AdminScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 400,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -39,10 +38,11 @@ class _AdminScreenState extends State<AdminScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => AddProduct()));
+                                      builder: (context) =>
+                                          const AddProduct()));
                             },
-                            leading: Icon(Icons.add),
-                            title: Text('Add Product'),
+                            leading: const Icon(Icons.add),
+                            title: const Text('Add Product'),
                           ),
                         ),
                       ),
@@ -54,10 +54,11 @@ class _AdminScreenState extends State<AdminScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ManageProduct()));
+                                      builder: (context) =>
+                                          const ManageProduct()));
                             },
-                            leading: Icon(Icons.manage_accounts),
-                            title: Text('Manage Product'),
+                            leading: const Icon(Icons.manage_accounts),
+                            title: const Text('Manage Product'),
                           ),
                         ),
                       ),

@@ -17,16 +17,16 @@ class HomeScreen extends StatefulWidget {
   static const routename = 'home';
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        child: MyAppBar(),
         preferredSize: Size.fromHeight(kToolbarHeight),
+        child: MyAppBar(),
       ),
       drawer: Drawer(
         child: ListView(

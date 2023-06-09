@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -9,21 +11,20 @@ class CRUD extends StatefulWidget {
 }
 
 class _CRUDState extends State<CRUD> {
-
   TextEditingController link = TextEditingController();
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Firebase CRUD"),
+        title: const Text("Firebase CRUD"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(children: [
           TextField(
             controller: link,
-            decoration: InputDecoration(hintText: 'Enter link'),
+            decoration: const InputDecoration(hintText: 'Enter link'),
           ),
           ElevatedButton(
               onPressed: () async {
@@ -40,11 +41,10 @@ class _CRUDState extends State<CRUD> {
                           .delete();
                     }
                   });
-print("Link added");                  link.clear();
-                } else {
-print('enter valid link');                }
+                  link.clear();
+                } else {}
               },
-              child: Text('Update'))
+              child: const Text('Update'))
         ]),
       ),
     );

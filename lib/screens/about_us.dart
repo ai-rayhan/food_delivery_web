@@ -17,7 +17,7 @@ class AboutUsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            MyAppBar(),
+            const MyAppBar(),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -34,7 +34,7 @@ class AboutUsPage extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 100,left: 50),
+                            padding: const EdgeInsets.only(top: 100, left: 50),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               // crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,7 +42,8 @@ class AboutUsPage extends StatelessWidget {
                                 Text(
                                   "About Us",
                                   style: TextStyle(
-                                      fontSize: 30, fontWeight: FontWeight.bold),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -58,16 +59,14 @@ class AboutUsPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Expanded(
-                          flex: 2,
-                          child: SizedBox())
+                        const Expanded(flex: 2, child: SizedBox())
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            ServicesCard(),
+            const ServicesCard(),
             Column(
               children: [
                 const SizedBox(height: 20),
@@ -81,28 +80,54 @@ class AboutUsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 // Team Members
-              Responsive(mobile: Column(
-                children: const [
-                  MemberCard(image: 'assets/images/member3.png', title: 'Jone Deo',),
-                  SizedBox(height: 10,),
-                  MemberCard(image: 'assets/images/member2.png', title: 'Jone Deo',),
-                ],
-              ), tablet: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  MemberCard(image: 'assets/images/member3.png', title: 'Jone Deo',),
-                  MemberCard(image: 'assets/images/member2.png', title: 'Jone Deo',),
-                ],
-              ), desktop: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  MemberCard(image: 'assets/images/member3.png', title: 'Jone Deo',),
-                  SizedBox(width: 175,),
-                  MemberCard(image: 'assets/images/member2.png', title: 'Jone Deo',),
-                ],
-              ),),
+                Responsive(
+                  mobile: Column(
+                    children: const [
+                      MemberCard(
+                        image: 'assets/images/member3.png',
+                        title: 'Jone Deo',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MemberCard(
+                        image: 'assets/images/member2.png',
+                        title: 'Jone Deo',
+                      ),
+                    ],
+                  ),
+                  tablet: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: const [
+                      MemberCard(
+                        image: 'assets/images/member3.png',
+                        title: 'Jone Deo',
+                      ),
+                      MemberCard(
+                        image: 'assets/images/member2.png',
+                        title: 'Jone Deo',
+                      ),
+                    ],
+                  ),
+                  desktop: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      MemberCard(
+                        image: 'assets/images/member3.png',
+                        title: 'Jone Deo',
+                      ),
+                      SizedBox(
+                        width: 175,
+                      ),
+                      MemberCard(
+                        image: 'assets/images/member2.png',
+                        title: 'Jone Deo',
+                      ),
+                    ],
+                  ),
+                ),
 
                 const SizedBox(height: 20),
                 Container(
@@ -115,23 +140,23 @@ class AboutUsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 // Contact Information
                 const Padding(
-                  padding:  EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: ListTile(
                     leading: Icon(Icons.email),
                     title: Text('info@mycompany.com'),
                   ),
                 ),
                 const Padding(
-                  padding:  EdgeInsets.all(10.0),
-                  child:  ListTile(
+                  padding: EdgeInsets.all(10.0),
+                  child: ListTile(
                     leading: Icon(Icons.phone),
                     title: Text('(123) 456-7890'),
                   ),
                 ),
-             Footer()
+                Footer()
               ],
             ),
           ],
@@ -140,6 +165,7 @@ class AboutUsPage extends StatelessWidget {
     );
   }
 }
+
 class MemberCard extends StatelessWidget {
   const MemberCard({
     Key? key,
@@ -154,7 +180,7 @@ class MemberCard extends StatelessWidget {
       elevation: 5,
       borderRadius: BorderRadius.circular(8.0),
       child: Container(
-        padding: EdgeInsets.all(kPadding / 2),
+        padding: const EdgeInsets.all(kPadding / 2),
         width: 300,
         height: 400,
         child: Column(
@@ -168,18 +194,17 @@ class MemberCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Text(
               title,
-              style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit, ",
               textAlign: TextAlign.center,
               style: TextStyle(

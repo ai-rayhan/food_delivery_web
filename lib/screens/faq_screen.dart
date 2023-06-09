@@ -9,18 +9,23 @@ class FAQPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: Column(
           children: [
-             Header(),
-             SizedBox(height: 10,),
+            const Header(),
+            const SizedBox(
+              height: 10,
+            ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal:devicesize(context).width/6, vertical: devicesize(context).height/6),
+              padding: EdgeInsets.symmetric(
+                  horizontal: devicesize(context).width / 6,
+                  vertical: devicesize(context).height / 6),
               child: Column(
-                
-                children: [
-                   Text("Frequently Asked Questions",style: TextStyle(fontSize: 30),),
+                children: const [
+                  Text(
+                    "Frequently Asked Questions",
+                    style: TextStyle(fontSize: 30),
+                  ),
                   FAQItem(
                     question: 'How do I place an order?',
                     answer:
@@ -67,41 +72,41 @@ class FAQItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _FAQItemState createState() => _FAQItemState();
+  FAQItemState createState() => FAQItemState();
 }
 
-class _FAQItemState extends State<FAQItem> {
+class FAQItemState extends State<FAQItem> {
   bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: ExpansionTile(
         title: Text(
           widget.question,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              widget.answer,
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
         onExpansionChanged: (expanded) {
           setState(() {
             _isExpanded = expanded;
           });
         },
         trailing: _isExpanded
-            ? Icon(Icons.keyboard_arrow_up)
-            : Icon(Icons.keyboard_arrow_down),
+            ? const Icon(Icons.keyboard_arrow_up)
+            : const Icon(Icons.keyboard_arrow_down),
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              widget.answer,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
+        ],
       ),
     );
   }

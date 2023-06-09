@@ -15,7 +15,6 @@ class MyAppBar extends StatefulWidget {
 }
 
 class _MyAppBarState extends State<MyAppBar> {
-
   //////////////////get data from firebase firestore//////////////
   bool isLoading = false;
   final String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -48,113 +47,122 @@ class _MyAppBarState extends State<MyAppBar> {
 
   @override
   void initState() {
+    super.initState();
     getData();
   }
-
-
 
 /////////////////get data from firestore/////////////
   @override
   Widget build(BuildContext context) {
-    return isLoading?AppBar(
-      elevation: 0.1,
-      backgroundColor: Colors.deepOrange,
-      title: Text(
-        "Foodie",
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, HomeScreen.routename);
-          },
-          child: Text(
-            "Home",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewScreen()));
-          },
-          child: Text(
-            "Review",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FAQPage()));
-
-          },
-          child: Text(
-            "FAQ",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.search),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.shopping_cart),
-        ),
-      ],
-    ): AppBar(
-      elevation: 0.1,
-      backgroundColor: Colors.deepOrange,
-      title: Text(
-        "Foodie",
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            "Home",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewScreen()));
-
-          },
-          child: Text(
-            "Review",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FAQPage()));
-
-          },
-          child: Text(
-            "FAQ",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        if(userData['admin']==true)
-         TextButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminScreen()));
-          },
-          child: Text(
-            "Admin panel",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.search),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.shopping_cart),
-        ),
-      ],
-    );
+    return isLoading
+        ? AppBar(
+            elevation: 0.1,
+            backgroundColor: Colors.deepOrange,
+            title: const Text(
+              "Foodie",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, HomeScreen.routename);
+                },
+                child: const Text(
+                  "Home",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ReviewScreen()));
+                },
+                child: const Text(
+                  "Review",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const FAQPage()));
+                },
+                child: const Text(
+                  "FAQ",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.search),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart),
+              ),
+            ],
+          )
+        : AppBar(
+            elevation: 0.1,
+            backgroundColor: Colors.deepOrange,
+            title: const Text(
+              "Foodie",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "Home",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ReviewScreen()));
+                },
+                child: const Text(
+                  "Review",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const FAQPage()));
+                },
+                child: const Text(
+                  "FAQ",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              if (userData['admin'] == true)
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AdminScreen()));
+                  },
+                  child: const Text(
+                    "Admin panel",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.search),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart),
+              ),
+            ],
+          );
   }
 }

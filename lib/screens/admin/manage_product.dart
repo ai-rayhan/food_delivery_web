@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/snackbar.dart';
@@ -16,7 +18,7 @@ class _ManageProductState extends State<ManageProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Manage Product'),
+        title: const Text('Manage Product'),
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
@@ -25,7 +27,7 @@ class _ManageProductState extends State<ManageProduct> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -54,7 +56,7 @@ class _ManageProductState extends State<ManageProduct> {
                     leading: Image.network(prod['image'], width: 50),
                     subtitle: Text(prod['price'].toString()),
                     title: Text(prod['name']),
-                    trailing: Container(
+                    trailing: SizedBox(
                       width: 100,
                       child: Row(
                         children: [
@@ -66,7 +68,7 @@ class _ManageProductState extends State<ManageProduct> {
                                         builder: (context) => UpdateProduct(
                                             productId: prod['id'])));
                               },
-                              icon: Icon(Icons.edit)),
+                              icon: const Icon(Icons.edit)),
                           IconButton(
                               onPressed: () async {
                                 await FirebaseFirestore.instance
@@ -78,7 +80,7 @@ class _ManageProductState extends State<ManageProduct> {
                                 });
                                 showSnackBar(context, "Deleted");
                               },
-                              icon: Icon(Icons.delete)),
+                              icon: const Icon(Icons.delete)),
                         ],
                       ),
                     ),

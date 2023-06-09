@@ -1,8 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
-import '../models/product_model.dart';
 
 class Products extends StatelessWidget {
   const Products({
@@ -10,7 +8,7 @@ class Products extends StatelessWidget {
     required this.product,
     required this.press,
   }) : super(key: key);
-  final  product;
+  final product;
   final VoidCallback press;
 
   @override
@@ -41,25 +39,29 @@ class Products extends StatelessWidget {
                       children: [
                         Text(
                           product.name,
-                          style:
-                              const TextStyle(fontSize: 20, color: Colors.deepOrange),
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.deepOrange),
                         ),
                       ],
                     ),
-                    leading:  Text("\$${product.price.toString()}"),
-                    trailing:  IconButton(icon: Icon(Icons.shopping_cart,color:Colors.deepOrange,),onPressed: (){},),
+                    leading: Text("\$${product.price.toString()}"),
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.shopping_cart,
+                        color: Colors.deepOrange,
+                      ),
+                      onPressed: () {},
+                    ),
                     backgroundColor: Colors.white,
                   ),
-                 
-                  
                 ],
               ),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
-               product.image,
-               fit: BoxFit.cover,
+                product.image,
+                fit: BoxFit.cover,
               ),
             ),
           ),
