@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_delivery_web/components/product.dart' as ui;
+import 'package:food_delivery_web/models/responsive.dart';
 import 'package:food_delivery_web/screens/product_details_screen.dart';
+
+import 'offer_card.dart';
 
 class Product {
   final String name;
@@ -51,6 +55,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
     return Container(
       child: FutureBuilder(
           future: _productService.getAllProducts(),
@@ -69,49 +74,129 @@ class _ProductListScreenState extends State<ProductListScreen> {
               return Center(child: Text('No products found.'));
             }
 
-            return GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                // mainAxisSpacing: 8.0,
-                // crossAxisSpacing: 8.0,
-              ),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final product = products[index];
-
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProductDetailsScreen(
-                                    description: product.description,
-                                    id: product.id,
-                                    image: product.image,
-                                    name: product.name,
-                                    price: product.price,
-                                  )));
-                    },
-                    child: Card(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.network(product.image),
-                          Text(product.name),
-                          Text('\$${product.price.toStringAsFixed(2)}')
-                        ],
-                      ),
+            return Padding(
+              padding: const EdgeInsets.only(left: 40,right: 40),
+              child: Column(
+                children: [
+                 Text("Popular Now",style: TextStyle(fontSize: 25),),
+                 Divider(),
+                  Responsive(
+                    desktop: ProductCard(
+                      products: products,
+                      crossAxiscount: _size.width < 650 ? 2 : 3,
+                      aspectRatio: _size.width < 650 ? 0.85 : 1.1,
+                    ),
+                    tablet: ProductCard(
+                      products: products,
+                      crossAxiscount: _size.width < 825 ? 2 : 3,
+                      aspectRatio: _size.width < 825 ? 0.85 : 1.1,
+                    ),
+                    mobile: ProductCard(
+                      products: products,
+                      crossAxiscount: _size.width < 690 ? 2 : 3,
+                      aspectRatio: _size.width < 560 ? 0.85 : 1.1,
                     ),
                   ),
-                );
-              },
+                    OfferCard(),
+                    SizedBox(height: 20,),
+                    Text("Browse Top Deals",style: TextStyle(fontSize: 25),),
+                  Divider(),
+                   Responsive(
+                    desktop: ProductCard(
+                      products: products,
+                      crossAxiscount: _size.width < 650 ? 2 : 3,
+                      aspectRatio: _size.width < 650 ? 0.85 : 1.1,
+                    ),
+                    tablet: ProductCard(
+                      products: products,
+                      crossAxiscount: _size.width < 825 ? 2 : 3,
+                      aspectRatio: _size.width < 825 ? 0.85 : 1.1,
+                    ),
+                    mobile: ProductCard(
+                      products: products,
+                      crossAxiscount: _size.width < 690 ? 2 : 3,
+                      aspectRatio: _size.width < 560 ? 0.85 : 1.1,
+                    ),
+                  ),
+                ],
+              ),
             );
           }),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    super.key,
+    required this.products,
+    required this.aspectRatio,
+    required this.crossAxiscount,
+  });
+
+  final List<Product> products;
+  final aspectRatio;
+  final crossAxiscount;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxiscount, childAspectRatio: aspectRatio
+            // mainAxisSpacing: 8.0,
+            // crossAxisSpacing: 8.0,
+            ),
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          final product = products[index];
+          return ui.Products(
+            product: product,
+            press: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProductDetailsScreen(
+                              description: product.description,
+                              id: product.id,
+                              image: product.image,
+                              name: product.name,
+                              price: product.price,
+                            )));
+            },
+          );
+          // return Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: InkWell(
+              // onTap: () {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => ProductDetailsScreen(
+              //                 description: product.description,
+              //                 id: product.id,
+              //                 image: product.image,
+              //                 name: product.name,
+              //                 price: product.price,
+              //               )));
+          //     },
+          //     child: Card(
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.start,
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         mainAxisSize: MainAxisSize.min,
+          //         children: [
+          //           Image.network(product.image),
+          //           Text(product.name),
+          //           Text('\$${product.price.toStringAsFixed(2)}')
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // );
+        },
+      ),
     );
   }
 }

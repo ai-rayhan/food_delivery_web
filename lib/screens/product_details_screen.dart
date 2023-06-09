@@ -21,117 +21,137 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int quantity = 1;
+  bool ismobile(context) {
+    var devicesize = MediaQuery.of(context).size.width;
+    if (devicesize <= 800) {
+      return true;
+    } else
+      return false;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         child: MyAppBar(),
         preferredSize: Size.fromHeight(kToolbarHeight),
       ),
       body: Container(
+          margin: EdgeInsets.all(50),
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
             child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 18),
-                    child: Container(
-                      height: 550,
-                      width: 370,
+              ismobile(context)?Center(
                       child: Image.network(
                         widget.image,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
+                        height:ismobile(context)?300: 500,
+                        width: ismobile(context)?300: 500,
+                      ),
+                    )
+                  :Container(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                !ismobile(context)?Expanded(
+                    flex: 2,
+                    child: Center(
+                      child: Image.network(
+                        widget.image,
+                        fit: BoxFit.contain,
+                        height: 500,
+                        width: 500,
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18, top: 25),
+                  ):Container(),
+                  // Spacer(),
+                  Expanded(
+                    flex: ismobile(context)?1:3,
                     child: Container(
-                      width: 450,
+                      margin: EdgeInsets.only(top: ismobile(context)?20: 80, left: 30),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.name,
-                            style: TextStyle(
-                                fontSize: 40, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "\$${widget.price.toString()}",
-                            style: TextStyle(
+                          "Product Name: ${ widget.name}",
+                            style: const TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
+                          
+                          const SizedBox(
                             height: 15,
                           ),
                           Text(
-                            widget.description,
-                            style: TextStyle(
-                              fontSize: 22,
-                            ),
+                          "Availability: In Stock",
+                            style: const TextStyle(
+                                 fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          Container(
-                            width: 300,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.deepOrange,
-                            ),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          quantity -= 1;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.remove,
-                                        color: Colors.white,
-                                      )),
-                                  InkWell(
-                                    onTap: () {
-                                      print("send data to server");
-                                    },
-                                    child: Text(
-                                      "ADD ${quantity.toString()} ITEM TO CART",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          quantity += 1;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      )),
-                                ]),
+                          Text(
+                           "Description:\n\n${widget.description}",
+                            style: const TextStyle(
+                                // fontSize: 22,
+                                ),
                           ),
-                          SizedBox(
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Price:\$${widget.price.toString()}",
+                            style: const TextStyle(
+                                fontSize: 19, fontWeight: FontWeight.w600),
+                          ),
+                           const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          color: Colors.deepOrange,
+                                            onPressed: () {},
+                                            icon: Icon(Icons.remove)),
+                                        Text("1"),
+                                        IconButton(
+                                           color: Colors.deepOrange,
+                                            onPressed: () {},
+                                            icon: Icon(Icons.add))
+                                      ],
+                                    ),
+                                  )),
+                              Expanded(
+                                  flex: 4,
+                                  child: TextButton(
+                                    child: Text("Add to Cart",style: TextStyle(color: Colors.white),),
+                                    onPressed: () {},
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                Colors.deepOrange)),
+                                  ))
+                            ],
+                          ),
+                          const SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            'Total Cost: ${widget.price * quantity}',
-                            style: TextStyle(fontSize: 18),
-                          )
+                        
                         ],
                       ),
                     ),
                   )
                 ],
-              )
+              ),
+              Divider(),
+              Text("Releted Products",style: TextStyle(fontSize: 25),)
             ]),
           )),
     );
