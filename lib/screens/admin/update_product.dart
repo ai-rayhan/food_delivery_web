@@ -143,60 +143,61 @@ class _UpdateProductState extends State<UpdateProduct> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
-                  if (!_formKey.currentState!.validate()) {
-                    return;
-                  }
-                  final name = _nameController.text;
-                  final price = double.parse(_priceController.text);
-                  final imageUrl = _imageUrlController.text;
-                  final description = _descriptionController.text;
-                  try {
-                    await FirebaseFirestore.instance
-                        .collection('products')
-                        .doc('allproduct')
-                        .get()
-                        .then((docSnapshot) {
-                      if (docSnapshot.exists) {
-                        List<dynamic> prod =
-                            docSnapshot.data()!['productdetails'];
-                        int index =
-                            prod.indexWhere((prod) => prod['name'] == name);
-                        if (index != -1) {
-                          prod[index] = {
-                            'name': name,
-                            'price': price,
-                            'description': description,
-                            'image': imageUrl,
-                            'id': prod[index]['id']
-                          };
-                          FirebaseFirestore.instance
-                              .collection('products')
-                              .doc('allproduct')
-                              .update({'productdetails': prod});
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Product updated successfully'),
-                            ),
-                          );
-                          // clear the form
-                          _formKey.currentState!.reset();
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Product not found'),
-                            ),
-                          );
-                        }
-                      }
-                    });
-                  } catch (error) {
-                    // show error message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to update product'),
-                      ),
-                    );
-                  }
+                  _submitForm();
+                  // if (!_formKey.currentState!.validate()) {
+                  //   return;
+                  // }
+                  // final name = _nameController.text;
+                  // final price = double.parse(_priceController.text);
+                  // final imageUrl = _imageUrlController.text;
+                  // final description = _descriptionController.text;
+                  // try {
+                  //   await FirebaseFirestore.instance
+                  //       .collection('products')
+                  //       .doc('allproduct')
+                  //       .get()
+                  //       .then((docSnapshot) {
+                  //     if (docSnapshot.exists) {
+                  //       List<dynamic> prod =
+                  //           docSnapshot.data()!['productdetails'];
+                  //       int index =
+                  //           prod.indexWhere((prod) => prod['name'] == name);
+                  //       if (index != -1) {
+                  //         prod[index] = {
+                  //           'name': name,
+                  //           'price': price,
+                  //           'description': description,
+                  //           'image': imageUrl,
+                  //           'id': prod[index]['id']
+                  //         };
+                  //         FirebaseFirestore.instance
+                  //             .collection('products')
+                  //             .doc('allproduct')
+                  //             .update({'productdetails': prod});
+                  //         ScaffoldMessenger.of(context).showSnackBar(
+                  //           SnackBar(
+                  //             content: Text('Product updated successfully'),
+                  //           ),
+                  //         );
+                  //         // clear the form
+                  //         _formKey.currentState!.reset();
+                  //       } else {
+                  //         ScaffoldMessenger.of(context).showSnackBar(
+                  //           SnackBar(
+                  //             content: Text('Product not found'),
+                  //           ),
+                  //         );
+                  //       }
+                  //     }
+                  //   });
+                  // } catch (error) {
+                  //   // show error message
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     SnackBar(
+                  //       content: Text('Failed to update product'),
+                  //     ),
+                  //   );
+                  // }
                 },
                 child: Text('Update'),
               ),
