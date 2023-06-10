@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/firebase_options.dart';
+import 'package:food_delivery_web/provider/cart.dart';
 import 'package:food_delivery_web/screens/CRUD.dart';
 import 'package:food_delivery_web/screens/about_us.dart';
 import 'package:food_delivery_web/screens/auth_screen.dart';
@@ -20,19 +21,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      //removing debugbanner
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-        fontFamily: 'Montserrat',
+    return MultiProvider(
+      providers: [
+         ChangeNotifierProvider(create: ((context) => Cart())),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        //removing debugbanner
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+    
+          primarySwatch: Colors.blue,
+          fontFamily: 'Montserrat',
+        ),
+        home: const AuthWrapper(),
+        routes: {
+            HomeScreen.routename: (ctx) => HomeScreen(),
+          },
       ),
-      home: const AuthWrapper(),
-      routes: {
-          HomeScreen.routename: (ctx) => HomeScreen(),
-        },
     );
   }
 
