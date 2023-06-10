@@ -26,7 +26,7 @@ class HomeScreenState extends State<HomeScreen> {
     return Responsive.isMobile(context)
         ? Scaffold(
             appBar: AppBar(
-              automaticallyImplyLeading: false,
+              // automaticallyImplyLeading: false,
               elevation: 0.1,
               backgroundColor: Colors.deepOrange,
               title: const Text(
@@ -49,7 +49,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  MobMenu()
+                  MobMenu(),
                 ],
               ),
             ),
