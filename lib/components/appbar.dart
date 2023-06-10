@@ -10,6 +10,8 @@ import 'package:food_delivery_web/screens/home_screen.dart';
 import 'package:food_delivery_web/screens/reviews_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/cart_screen.dart';
+
 class MyAppBar extends StatefulWidget {
   const MyAppBar({Key? key}) : super(key: key);
 
@@ -191,10 +193,19 @@ class _MyAppBarState extends State<MyAppBar> {
                 onPressed: () {},
                 icon: const Icon(Icons.search),
               ),
-              IconButton(
-                onPressed: () {},
+             IconButton(
+                onPressed: () {
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const CartScreen(),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.shopping_cart),
               ),
+
+
             ],
           );
   }

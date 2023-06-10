@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:food_delivery_web/components/display_product.dart';
+import 'package:provider/provider.dart';
+import '../provider/cart.dart';
 import '../constants/constants.dart';
 
 class Products extends StatelessWidget {
@@ -8,11 +10,12 @@ class Products extends StatelessWidget {
     required this.product,
     required this.press,
   }) : super(key: key);
-  final product;
+  final Product product;
   final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(kPadding),
       child: InkWell(
@@ -50,7 +53,9 @@ class Products extends StatelessWidget {
                         Icons.shopping_cart,
                         color: Colors.deepOrange,
                       ),
-                      onPressed: () {},
+                      onPressed: (){
+                        cart.addItem(product.id, product.name, product.price);
+                      },
                     ),
                     backgroundColor: Colors.white,
                   ),

@@ -1,172 +1,103 @@
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../constants/constants.dart';
-import '../models/product_model.dart';
+import '../provider/orders.dart';
+import '../widgets/cart_item.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+import '../provider/cart.dart' show Cart;
 
-  @override
-  CartScreenState createState() => CartScreenState();
-}
+class CartScreen extends StatelessWidget {
+  static const routeName = '/cart';
 
-class CartScreenState extends State<CartScreen> {
+  const CartScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var devicesize = MediaQuery.of(context).size;
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text("Shopping Cart",
-            style: TextStyle(
-              color: kSecondaryColor,
-            )),
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text('Your Cart'),
       ),
-      body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: devicesize.width / 7, vertical: 10),
-        child: ListView(
-          children: [
-            ListView.builder(
-                //use shrink wrap true and scrollphysics to avoid error because we are using listview in side listview or column
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                itemCount: 4,
-                itemBuilder: (context, index) => FavouriteCard(
-                      product: products[index],
-                      press: () {},
-                    ))
-          ],
-        ),
-      )),
+      body: Column(
+        children: <Widget>[
+          Card(
+            margin: const EdgeInsets.all(15),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  const Text(
+                    'Total',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const Spacer(),
+                  Chip(
+                    label: Text(
+                      '\$${cart.totalAmaount.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          // color: Theme.of(context).primaryColor,
+                          ),
+                    ),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                 OrderButton(cart: cart)
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView.builder(
+                itemCount: cart.items.length,
+                itemBuilder: (ctx, i) => CartItem(
+                      cart.items.values.toList()[i].id,
+                      cart.items.keys.toList()[i],
+                      cart.items.values.toList()[i].price,
+                      cart.items.values.toList()[i].quantity,
+                      cart.items.values.toList()[i].title,
+                    )),
+          )
+        ],
+      ),
     );
   }
 }
 
-class FavouriteCard extends StatelessWidget {
-  const FavouriteCard({
-    Key? key,
-    required this.product,
-    required this.press,
-  }) : super(key: key);
-  final Product product;
-  final VoidCallback press;
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    required this.cart,
+  });
+
+  final Cart cart;
+
+  @override
+  _OrderButtonState createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  var _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
-      child: InkWell(
-        onTap: press,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
-          decoration: BoxDecoration(
-              color: kSecondaryColor.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(15.0)),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  Image.asset(
-                    product.image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                    const Text(
-                      'Lorem ipsum salt as seer amer bty ruy erw as dosl poue oiu oi',
-                      maxLines: 2,
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "\$20",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    color: kPrimaryColor,
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                child: const Icon(
-                                  Icons.remove,
-                                  color: kSecondaryColor,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8.0,
-                            ),
-                            const Text(
-                              "1",
-                              style: TextStyle(
-                                color: kSecondaryColor,
-                                fontSize: 20,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8.0,
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    color: kPrimaryColor,
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: kSecondaryColor,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+    return TextButton(
+      child: _isLoading ? CircularProgressIndicator() : Text('ORDER NOW'),
+      onPressed: (widget.cart.totalAmaount <= 0 || _isLoading)
+          ? null
+          : () async {
+              setState(() {
+                _isLoading = true;
+              });
+              await Provider.of<Orders>(context, listen: false).addOrder(
+                widget.cart.items.values.toList(),
+                widget.cart.totalAmaount,
+              );
+              setState(() {
+                _isLoading = false;
+              });
+              widget.cart.clear();
+            },
     );
   }
 }
