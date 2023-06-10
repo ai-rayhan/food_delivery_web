@@ -3,6 +3,8 @@ import 'package:food_delivery_web/components/appbar.dart';
 import 'package:food_delivery_web/screens/admin/add_product.dart';
 import 'package:food_delivery_web/screens/admin/manage_product.dart';
 
+import 'view_order_screen.dart';
+
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
 
@@ -59,6 +61,22 @@ class _AdminScreenState extends State<AdminScreen> {
                             },
                             leading: const Icon(Icons.manage_accounts),
                             title: const Text('Manage Product'),
+                          ),
+                        ),
+                      ),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                           ViewOrders()));
+                            },
+                            leading: const Icon(Icons.manage_accounts),
+                            title: const Text('View Orders'),
                           ),
                         ),
                       ),

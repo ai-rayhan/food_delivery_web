@@ -199,7 +199,7 @@ class _MyAppBarState extends State<MyAppBar> {
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const CartScreen(),
+                      builder: (BuildContext context) =>  CartScreen(),
                     ),
                   );
                 },

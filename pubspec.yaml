@@ -45,6 +45,7 @@ dependencies:
   flutter_phoenix: ^1.1.1
   firebase_auth: ^4.4.0
   phoenix_native: ^0.0.2
+  flutter_bkash: ^0.1.3
 
 dev_dependencies:
   flutter_test:

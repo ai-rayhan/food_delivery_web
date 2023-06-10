@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/appbar.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/cart.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen(
@@ -31,6 +34,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context, listen: false);
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
@@ -132,7 +136,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               Expanded(
                                   flex: 4,
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      cart.addItem(widget.id, widget.name,
+                                          widget.price);
+                                    },
                                     style: const ButtonStyle(
                                         backgroundColor:
                                             MaterialStatePropertyAll(
