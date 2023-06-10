@@ -9,10 +9,14 @@ class FAQPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("FAQ"),
+        centerTitle: true,
+        backgroundColor: Colors.red,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(),
             const SizedBox(
               height: 10,
             ),
