@@ -2,9 +2,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_web/provider/firebase_auth_methods.dart';
+import 'package:food_delivery_web/provider/auth_provider.dart';
 
 import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/constant.dart';
 
@@ -77,6 +78,8 @@ class AuthCardState extends State<AuthCard> {
   final _passwordController = TextEditingController();
 
   void _submit() async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     if (!_formKey.currentState!.validate()) {
       // Invalid!
       return;
@@ -86,18 +89,15 @@ class AuthCardState extends State<AuthCard> {
       _isLoading = true;
     });
     if (_authMode == AuthMode.login) {
-      await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
-        email: _email!,
-        password: _password!,
-        context: context,
-      );
+      await authProvider.login(
+          email: _email!, password: _password!, context: context);
     } else {
-      await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
-        email: _email!,
-        password: _password!,
-        fullname: _fullname!,
-        context: context,
-      );
+      await authProvider.signUp(
+          email: _email!,
+          password: _password!,
+          name: _fullname!,
+          context: context);
+
       setState(() {
         _authMode = AuthMode.login;
       });

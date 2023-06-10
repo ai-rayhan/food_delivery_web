@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_web/provider/firebase_auth_methods.dart';
+import 'package:food_delivery_web/provider/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/constants.dart';
 import '../screens/contact_us.dart';
@@ -149,6 +150,8 @@ class MobMenu extends StatefulWidget {
 class _MobMenuState extends State<MobMenu> {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
@@ -193,7 +196,7 @@ class _MobMenuState extends State<MobMenu> {
           ),
           HeaderMenu(
             press: () async {
-              await FirebaseAuthMethods(FirebaseAuth.instance).signOut(context);
+              await authProvider.signOut();
             },
             title: "Logout",
           ),
