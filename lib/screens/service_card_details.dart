@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/footer.dart';
 
-import '../components/header.dart';
 import '../constants/constants.dart';
 
 class ServiceCardDetailScreen extends StatelessWidget {
@@ -20,7 +19,6 @@ class ServiceCardDetailScreen extends StatelessWidget {
           //  constraints: BoxConstraints(maxWidth: kMaxWidth),
           child: Column(
             children: [
-              const Header(),
               service,
               const SizedBox(
                 height: 40,

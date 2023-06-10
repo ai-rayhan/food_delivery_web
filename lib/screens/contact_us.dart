@@ -1,7 +1,6 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
-import 'package:food_delivery_web/components/header.dart';
 import 'package:food_delivery_web/constants/constant.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
@@ -14,7 +13,6 @@ class ContactUsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(),
             Container(
               padding: EdgeInsets.symmetric(
                   horizontal: devicesize(context).width / 6,
