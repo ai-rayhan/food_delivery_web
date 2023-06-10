@@ -56,6 +56,7 @@ class _MyAppBarState extends State<MyAppBar> {
   Widget build(BuildContext context) {
     return isLoading
         ? AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.1,
             backgroundColor: Colors.deepOrange,
             title: const Text(
@@ -105,6 +106,7 @@ class _MyAppBarState extends State<MyAppBar> {
             ],
           )
         : AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.1,
             backgroundColor: Colors.deepOrange,
             title: const Text(

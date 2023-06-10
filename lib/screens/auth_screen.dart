@@ -263,8 +263,6 @@ class AuthCardState extends State<AuthCard> {
               const SizedBox(
                 height: 20,
               ),
-              const Divider(),
-              const Center(child: Text('OR')),
             ],
           ),
         ),

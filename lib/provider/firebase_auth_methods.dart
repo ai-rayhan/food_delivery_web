@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:food_delivery_web/components/snackbar.dart';
+import 'package:food_delivery_web/screens/auth_screen.dart';
 import 'package:food_delivery_web/screens/home_screen.dart';
 
 class FirebaseAuthMethods {
@@ -76,7 +77,8 @@ class FirebaseAuthMethods {
   Future<void> signOut(BuildContext context) async {
     try {
       await _auth.signOut();
-      Phoenix.rebirth(context);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => AuthScreen()));
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }

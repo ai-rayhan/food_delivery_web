@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_web/provider/firebase_auth_methods.dart';
 
 import '../constants/constants.dart';
 import '../screens/contact_us.dart';
@@ -153,36 +155,47 @@ class _MobMenuState extends State<MobMenu> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HeaderMenu(
-            press: () {},
-            title: "Menu",
+            press: () {
+              Navigator.pop(context);
+            },
+            title: "Home",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "For Riders",
+            title: "Review",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "About",
+            title: "Admin Panel",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "Reviews",
+            title: "Order History",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "Restaurants",
+            title: "FAQ",
+          ),
+          const SizedBox(
+            height: kPadding,
+          ),
+          HeaderMenu(
+            press: () async {
+              await FirebaseAuthMethods(FirebaseAuth.instance).signOut(context);
+            },
+            title: "Logout",
           ),
         ],
       ),
