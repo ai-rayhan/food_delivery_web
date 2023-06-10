@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/snackbar.dart';
+import 'package:food_delivery_web/provider/auth_provider.dart';
 import 'package:food_delivery_web/screens/admin/main_screen.dart';
+import 'package:food_delivery_web/screens/auth_screen.dart';
 import 'package:food_delivery_web/screens/faq_screen.dart';
 import 'package:food_delivery_web/screens/home_screen.dart';
 import 'package:food_delivery_web/screens/reviews_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/cart_screen.dart';
 
@@ -56,8 +59,11 @@ class _MyAppBarState extends State<MyAppBar> {
 /////////////////get data from firestore/////////////
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     return isLoading
         ? AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.1,
             backgroundColor: Colors.deepOrange,
             title: const Text(
@@ -67,7 +73,8 @@ class _MyAppBarState extends State<MyAppBar> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, HomeScreen.routename);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
                 child: const Text(
                   "Home",
@@ -96,6 +103,17 @@ class _MyAppBarState extends State<MyAppBar> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+              TextButton(
+                onPressed: () async {
+                  await authProvider.signOut();
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => AuthScreen()));
+                },
+                child: const Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.search),
@@ -107,6 +125,7 @@ class _MyAppBarState extends State<MyAppBar> {
             ],
           )
         : AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.1,
             backgroundColor: Colors.deepOrange,
             title: const Text(
@@ -115,7 +134,10 @@ class _MyAppBarState extends State<MyAppBar> {
             ),
             actions: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
                 child: const Text(
                   "Home",
                   style: TextStyle(color: Colors.white),
@@ -156,6 +178,17 @@ class _MyAppBarState extends State<MyAppBar> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+              TextButton(
+                onPressed: () async {
+                  await authProvider.signOut();
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => AuthScreen()));
+                },
+                child: const Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.search),

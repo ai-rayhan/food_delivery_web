@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_web/provider/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/constants.dart';
 import '../screens/contact_us.dart';
@@ -147,42 +150,55 @@ class MobMenu extends StatefulWidget {
 class _MobMenuState extends State<MobMenu> {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HeaderMenu(
-            press: () {},
-            title: "Menu",
+            press: () {
+              Navigator.pop(context);
+            },
+            title: "Home",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "For Riders",
+            title: "Review",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "About",
+            title: "Admin Panel",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "Reviews",
+            title: "Order History",
           ),
           const SizedBox(
             height: kPadding,
           ),
           HeaderMenu(
             press: () {},
-            title: "Restaurants",
+            title: "FAQ",
+          ),
+          const SizedBox(
+            height: kPadding,
+          ),
+          HeaderMenu(
+            press: () async {
+              await authProvider.signOut();
+            },
+            title: "Logout",
           ),
         ],
       ),
