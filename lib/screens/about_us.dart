@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/appbar.dart';
 import 'package:food_delivery_web/components/footer.dart';
-import 'package:food_delivery_web/components/header.dart';
 import 'package:food_delivery_web/components/services_card.dart';
 import 'package:food_delivery_web/constants/constants.dart';
 import 'package:food_delivery_web/models/responsive.dart';

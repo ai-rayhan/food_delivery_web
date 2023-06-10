@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_web/components/display_product.dart';
+import 'package:food_delivery_web/screens/cart_screen.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart.dart';
 import '../constants/constants.dart';
@@ -53,8 +54,20 @@ class Products extends StatelessWidget {
                         Icons.shopping_cart,
                         color: Colors.deepOrange,
                       ),
-                      onPressed: (){
+                      onPressed: () {
                         cart.addItem(product.id, product.name, product.price);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text('Product Added to cart!'),
+                          action: SnackBarAction(
+                            label: 'View',
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CartScreen()));
+                            },
+                          ),
+                        ));
                       },
                     ),
                     backgroundColor: Colors.white,

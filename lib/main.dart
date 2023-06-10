@@ -6,7 +6,6 @@ import 'package:food_delivery_web/firebase_options.dart';
 import 'package:food_delivery_web/provider/cart.dart';
 import 'package:food_delivery_web/provider/auth_provider.dart';
 import 'package:food_delivery_web/provider/orders.dart';
-import 'package:food_delivery_web/screens/CRUD.dart';
 import 'package:food_delivery_web/screens/about_us.dart';
 import 'package:food_delivery_web/screens/auth_screen.dart';
 import 'package:food_delivery_web/screens/home_screen.dart';
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => Cart())),
-        ChangeNotifierProvider(create: ((context) => Orders('',[]))),
+        ChangeNotifierProvider(create: ((context) => Orders('', []))),
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(),
         ),
@@ -39,13 +38,13 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'Montserrat',
         ),
-         home: Consumer<AuthProvider>(builder: (_, authProvider, __) {
-        if (authProvider.isLoggedIn) {
-          return HomeScreen();
-        } else {
-          return AuthScreen();
-        }
-      }),
+        home: Consumer<AuthProvider>(builder: (_, authProvider, __) {
+          if (authProvider.isLoggedIn) {
+            return HomeScreen();
+          } else {
+            return AuthScreen();
+          }
+        }),
         routes: {
           HomeScreen.routename: (ctx) => HomeScreen(),
         },
