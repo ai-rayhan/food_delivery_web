@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Provider/orders.dart' show Orders;
+import '../provider/orders.dart' show Orders;
 import '../widgets/order_item.dart';
 
 class OrdersScreen extends StatefulWidget {

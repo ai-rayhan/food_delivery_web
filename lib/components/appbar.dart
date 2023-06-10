@@ -11,6 +11,7 @@ import 'package:food_delivery_web/screens/reviews_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/cart_screen.dart';
+import '../screens/orders_screen.dart';
 
 class MyAppBar extends StatefulWidget {
   const MyAppBar({Key? key}) : super(key: key);
@@ -205,7 +206,14 @@ class _MyAppBarState extends State<MyAppBar> {
                 icon: const Icon(Icons.shopping_cart),
               ),
 
-
+   TextButton(onPressed:(){
+          Navigator.push<void>(
+    context,
+    MaterialPageRoute<void>(
+      builder: (BuildContext context) => const OrdersScreen(),
+    ),
+  );
+        } , child: Text("Go Orders")),
             ],
           );
   }

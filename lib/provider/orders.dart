@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,17 +20,21 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
-  Orders(this.authToken, this._orders,this.userId);
-   var authToken;
-   var userId;
+  Orders(
+    this.authToken,
+    this._orders,
+  );
+  var authToken;
+  String userId = FirebaseAuth.instance.currentUser!.uid;
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
     return [..._orders];
   }
+
 // implement fatch and set order using map  in # screen/order screen.dart implement order data ,check line 17-25
   Future<void> fetchAndSetOrders() async {
     final url = Uri.parse(
-        'https://store-manager-f4301-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
+        'https://food-delivery-56a3c-default-rtdb.firebaseio.com/orders/$userId.json');
     final response = await http.get(url);
     final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -64,7 +68,7 @@ class Orders with ChangeNotifier {
 
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
     final url = Uri.parse(
-        'https://store-manager-f4301-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
+        'https://food-delivery-56a3c-default-rtdb.firebaseio.com/orders/$userId.json');
     final timestamp = DateTime.now();
     final response = await http.post(
       url,
@@ -90,6 +94,7 @@ class Orders with ChangeNotifier {
         products: cartProducts,
       ),
     );
+    print(userId);
     notifyListeners();
   }
 }
