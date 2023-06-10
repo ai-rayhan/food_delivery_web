@@ -3,6 +3,7 @@ import 'package:food_delivery_web/components/appbar.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/cart.dart';
+import 'cart_screen.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen(
@@ -137,8 +138,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   flex: 4,
                                   child: TextButton(
                                     onPressed: () {
-                                      cart.addItem(widget.id, widget.name,
-                                          widget.price);
+                                      cart.addItem(
+                                          widget.id, widget.name, widget.price);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: const Text(
+                                            'Product Added to cart!'),
+                                        action: SnackBarAction(
+                                          label: 'View',
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CartScreen()));
+                                          },
+                                        ),
+                                      ));
                                     },
                                     style: const ButtonStyle(
                                         backgroundColor:
