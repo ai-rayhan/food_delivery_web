@@ -26,10 +26,12 @@ class _ViewOrdersState extends State<ViewOrders> {
         ),
         // drawer: AppDrawer(),
         body: FutureBuilder(
-          future: Provider.of<Orders>(context).getOrderLength(),
+          future: Provider.of<Orders>(context).getOrder(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
+            } else if (snapshot.data == null) {
+              return Center(child: Text("No order yet"));
             } else if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 return Text('An Error occurred');
@@ -41,6 +43,14 @@ class _ViewOrdersState extends State<ViewOrders> {
                     return SingleChildScrollView(
                       child: ExpansionTile(
                         title: Text('Order No ${index + 1}'),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            Provider.of<Orders>(context, listen: false)
+                                .deleteOrder(
+                                    snapshot.data.keys.toList()[index]);
+                          },
+                        ),
                         children: [
                           Container(
                             height: 500,
