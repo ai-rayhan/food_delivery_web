@@ -20,9 +20,9 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
-  Orders(this.authToken, this._orders, this.userId);
+  Orders(this.authToken, this._orders,);
   var authToken;
-  String userId;
+  String userId = FirebaseAuth.instance.currentUser!.uid;
 
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {

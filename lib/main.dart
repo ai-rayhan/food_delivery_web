@@ -22,14 +22,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   String userId = FirebaseAuth.instance.currentUser!.uid;
+  
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => Cart())),
         ChangeNotifierProvider(
             create: ((context) => Orders(
                   '',
-                  [],userId
+                  [],
                 ))),
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(),
