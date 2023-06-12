@@ -22,10 +22,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => Cart())),
-        ChangeNotifierProvider(create: ((context) => Orders('', []))),
+        ChangeNotifierProvider(
+            create: ((context) => Orders(
+                  '',
+                  [],
+                ))),
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(),
         ),

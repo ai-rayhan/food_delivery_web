@@ -10,6 +10,7 @@ import 'package:food_delivery_web/screens/home_screen.dart';
 import 'package:food_delivery_web/screens/reviews_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/app_restart.dart';
 import '../screens/cart_screen.dart';
 import '../screens/orders_screen.dart';
 
@@ -184,6 +185,7 @@ class _MyAppBarState extends State<MyAppBar> {
                   await authProvider.signOut();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => AuthScreen()));
+                  AppRestartHelper.restartApp(context);
                 },
                 child: const Text(
                   "Logout",

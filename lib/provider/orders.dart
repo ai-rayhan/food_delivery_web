@@ -20,24 +20,30 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
-  Orders(
-    this.authToken,
-    this._orders,
-  );
+  Orders(this.authToken, this._orders,);
   var authToken;
   String userId = FirebaseAuth.instance.currentUser!.uid;
+
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
     return [..._orders];
   }
 
-    getOrderLength() async {
+  getOrder() async {
     const String url =
         'https://food-delivery-56a3c-default-rtdb.firebaseio.com/orders.json';
     final response = await http.get(Uri.parse(url));
     print(json.decode(response.body));
     var b = await json.decode(response.body);
     return b;
+  }
+
+  deleteOrder(userOrderId) async {
+    String url =
+        'https://food-delivery-56a3c-default-rtdb.firebaseio.com/orders/wwj65LQYclZAGojpVrLks6BB2Pl2.json';
+    await http.delete(Uri.parse(url));
+    print(userOrderId);
+    notifyListeners();
   }
 
 // implement fatch and set order using map  in # screen/order screen.dart implement order data ,check line 17-25
@@ -75,7 +81,8 @@ class Orders with ChangeNotifier {
 
 // implement add order using map in # screen/cart screen.dart implement order data line 92-94
 
-  Future<void> addOrder(List<CartItem> cartProducts, double total, String address,String transectionId,String paymentStatus) async {
+  Future<void> addOrder(List<CartItem> cartProducts, double total,
+      String address, String transectionId, String paymentStatus) async {
     final url = Uri.parse(
         'https://food-delivery-56a3c-default-rtdb.firebaseio.com/orders/$userId.json');
     final timestamp = DateTime.now();
@@ -88,7 +95,6 @@ class Orders with ChangeNotifier {
         'amount': total,
         'datetime': timestamp.toIso8601String(),
         'products': cartProducts
-        
             .map((cp) => {
                   'id': cp.id,
                   'title': cp.title,
