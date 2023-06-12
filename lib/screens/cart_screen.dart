@@ -44,7 +44,10 @@ class _CartScreenState extends State<CartScreen> {
                     label: Text('\$${cart.totalAmaount.toStringAsFixed(2)}'),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
-                       OrderButton(cart: cart, isCOD: bkash == false?true:false,)
+                  OrderButton(
+                    cart: cart,
+                    isCOD: bkash == false ? true : false,
+                  )
                 ],
               ),
             ),
@@ -137,7 +140,7 @@ TextEditingController mycontroller = TextEditingController();
 TextEditingController mycontroller2 = TextEditingController();
 
 class OrderButton extends StatefulWidget {
-   OrderButton({
+  OrderButton({
     Key? key,
     required this.cart,
     required this.isCOD,
@@ -163,12 +166,14 @@ class _OrderButtonState extends State<OrderButton> {
               setState(() {
                 _isLoading = true;
               });
-              if (mycontroller.text == ''||widget.isCOD==false?mycontroller2.text=='':mycontroller.text=='') {
+              if (mycontroller.text == '' || widget.isCOD == false
+                  ? mycontroller2.text == ''
+                  : mycontroller.text == '') {
                 print('object');
                 setState(() {
                   _isLoading = false;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Please enter Information correctly')));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please enter Information correctly')));
                 });
                 return;
               } else {
@@ -176,8 +181,8 @@ class _OrderButtonState extends State<OrderButton> {
                   widget.cart.items.values.toList(),
                   widget.cart.totalAmaount,
                   mycontroller.text,
-                  mycontroller2.text==''?'Not paid':mycontroller2.text,
-                  widget.isCOD?"COD":mycontroller2.text,
+                  mycontroller2.text == '' ? 'Not paid' : mycontroller2.text,
+                  widget.isCOD ? "COD" : mycontroller2.text,
                 );
               }
               setState(() {
