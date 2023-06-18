@@ -192,6 +192,17 @@ class _MyAppBarState extends State<MyAppBar> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const OrdersScreen(),
+                      ),
+                    );
+                  },
+                  child: Text("View Orders",
+                      style: TextStyle(color: Colors.white))),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.search),
@@ -207,16 +218,6 @@ class _MyAppBarState extends State<MyAppBar> {
                 },
                 icon: const Icon(Icons.shopping_cart),
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push<void>(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const OrdersScreen(),
-                      ),
-                    );
-                  },
-                  child: Text("Go Orders")),
             ],
           );
   }
