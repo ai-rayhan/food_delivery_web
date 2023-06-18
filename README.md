@@ -18,7 +18,7 @@ Admin panel
 Add products
 ![images6](screenshot/8.jpg)
 Manage products
-![images6](screenshot/9.jpg)
+![images7](screenshot/9.jpg)
 
 A few resources to get you started if this is your first Flutter project:
 
