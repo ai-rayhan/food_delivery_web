@@ -19,6 +19,7 @@ Add products
 ![images6](screenshot/8.jpg)
 Manage products
 ![images7](screenshot/9.jpg)
+<img src="screenshot/1.jpg" alt="Home screen" width="300" height="600">
 
 A few resources to get you started if this is your first Flutter project:
 
