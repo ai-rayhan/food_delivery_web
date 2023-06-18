@@ -28,6 +28,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
     final orderData = Provider.of<Orders>(context);
     return Scaffold(
       appBar: AppBar(
+       backgroundColor: const Color(0xffFE5722),
         title: const Text('Your Orders'),
       ),
       // drawer: const AppDrawer(),

@@ -35,8 +35,8 @@ class AuthScreen extends StatelessWidget {
                     //     colorFilter: ColorFilter.mode(
                     //         Color(0xff0AA1DD), BlendMode.color)),
                     gradient: LinearGradient(colors: [
-                      Color(0xff79DBE8),
-                      Color.fromARGB(255, 32, 153, 209),
+                      Color.fromARGB(255, 255, 110, 66),
+                      Color(0xffFE5722),
                     ]),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20),
@@ -45,7 +45,7 @@ class AuthScreen extends StatelessWidget {
                   child: Text(
                     "HI,WELCOME",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 30,color: Colors.white
                     ),
                   ),
                 ),
@@ -200,7 +200,7 @@ class AuthCardState extends State<AuthCard> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    child: const Text("Forgotton password"),
+                    child: const Text("Forgotton password",style: TextStyle(color: Color(0xEF000000)),),
                     onPressed: () {},
                   )
                 ],
@@ -213,7 +213,7 @@ class AuthCardState extends State<AuthCard> {
               else
                 RawMaterialButton(
                   onPressed: _submit,
-                  fillColor: const Color(0XFF0AA1DD),
+                  fillColor: const Color(0xffFE5722),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -273,19 +273,19 @@ class AuthCardState extends State<AuthCard> {
   InputDecoration decoration(String labeltext, IconData icon) {
     return InputDecoration(
       filled: true,
-      fillColor: const Color(0xffE8F9FD),
+      fillColor: Color(0xFFdddddd),
       labelText: labeltext,
       labelStyle: TextStyle(color: primaryColor),
       prefixIcon: Icon(
         icon,
-        // color: primaryColor,
+        color: primaryColor,
       ),
-      enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primaryColor, width: 1),
-          borderRadius: const BorderRadius.all(Radius.circular(50))),
-      focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primaryColorBlue),
-          borderRadius: const BorderRadius.all(Radius.circular(50))),
+      enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color:  Color.fromARGB(255, 233, 148, 91), width: 1),
+          borderRadius: BorderRadius.all(Radius.circular(50))),
+      focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 233, 148, 91)),
+          borderRadius: BorderRadius.all(Radius.circular(50))),
     );
   }
 }

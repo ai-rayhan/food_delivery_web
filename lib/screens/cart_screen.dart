@@ -24,6 +24,7 @@ class _CartScreenState extends State<CartScreen> {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xffFE5722),
         title: Text('Your Cart'),
       ),
       body: Column(
@@ -42,9 +43,12 @@ class _CartScreenState extends State<CartScreen> {
                   Spacer(),
                   Chip(
                     label: Text('\$${cart.totalAmaount.toStringAsFixed(2)}'),
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: const Color(0xffFE5722),
                   ),
-                       OrderButton(cart: cart, isCOD: bkash == false?true:false,)
+                  OrderButton(
+                    cart: cart,
+                    isCOD: bkash == false ? true : false,
+                  )
                 ],
               ),
             ),
@@ -82,6 +86,14 @@ class _CartScreenState extends State<CartScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Checkbox(
+                        checkColor: Color.fromARGB(255, 255, 255, 255),
+                        fillColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.disabled)) {
+                            return const Color(0xffFE5722).withOpacity(.32);
+                          }
+                          return const Color(0xffFE5722);
+                        }),
                         value: cod,
                         onChanged: (valuen) {
                           setState(() {
@@ -99,6 +111,14 @@ class _CartScreenState extends State<CartScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Checkbox(
+                           checkColor: Color.fromARGB(255, 255, 255, 255),
+                        fillColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.disabled)) {
+                            return const Color(0xffFE5722).withOpacity(.32);
+                          }
+                          return const Color(0xffFE5722);
+                        }),
                         value: bkash,
                         onChanged: (value) {
                           setState(() {
@@ -137,7 +157,7 @@ TextEditingController mycontroller = TextEditingController();
 TextEditingController mycontroller2 = TextEditingController();
 
 class OrderButton extends StatefulWidget {
-   OrderButton({
+  OrderButton({
     Key? key,
     required this.cart,
     required this.isCOD,
@@ -156,19 +176,26 @@ class _OrderButtonState extends State<OrderButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: _isLoading ? CircularProgressIndicator() : Text('ORDER NOW'),
+      child: _isLoading
+          ? CircularProgressIndicator()
+          : Text(
+              'ORDER NOW',
+              style: TextStyle(color: const Color(0xffFE5722)),
+            ),
       onPressed: (widget.cart.totalAmaount <= 0 || _isLoading)
           ? null
           : () async {
               setState(() {
                 _isLoading = true;
               });
-              if (mycontroller.text == ''||widget.isCOD==false?mycontroller2.text=='':mycontroller.text=='') {
+              if (mycontroller.text == '' || widget.isCOD == false
+                  ? mycontroller2.text == ''
+                  : mycontroller.text == '') {
                 print('object');
                 setState(() {
                   _isLoading = false;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Please enter Information correctly')));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please enter Information correctly')));
                 });
                 return;
               } else {
@@ -176,8 +203,8 @@ class _OrderButtonState extends State<OrderButton> {
                   widget.cart.items.values.toList(),
                   widget.cart.totalAmaount,
                   mycontroller.text,
-                  mycontroller2.text==''?'Not paid':mycontroller2.text,
-                  widget.isCOD?"COD":mycontroller2.text,
+                  mycontroller2.text == '' ? 'Not paid' : mycontroller2.text,
+                  widget.isCOD ? "COD" : mycontroller2.text,
                 );
               }
               setState(() {
